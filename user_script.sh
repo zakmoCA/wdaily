@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Step 1: File handling, permissions, and PATH setup
 mkdir -p ~/bin
 cp src/app.js ~/bin/wdaily
 chmod +x ~/bin/wdaily
