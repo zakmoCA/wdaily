@@ -2,7 +2,9 @@ node_modules/
 .env
 rubegoldberg.js
 refactor.js
-user_script.sh
+user_script0.sh
 notes.md
-test-env.sh
+test_env0.sh
+test_env1.sh
 playground.js
+init_user_env_vars.js
