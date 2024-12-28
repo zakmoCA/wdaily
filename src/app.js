@@ -90,7 +90,7 @@ async function sendEmail(task) {
   }
 }
 
-function processInput(input) { // No tasks parameter here
+function processInput(input) {
   const [command, ...args] = input.trim().split(' ')
   if (commands[command]) {
       commands[command](args.join(' '))
