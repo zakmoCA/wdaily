@@ -1,52 +1,51 @@
 #!/usr/bin/env node
-
 import nodemailer from 'nodemailer'
 import { configDotenv } from 'dotenv'
 import readline from 'node:readline'
-import { stdin as input, stdout as output } from 'node:process'
 
 configDotenv()
 
+const tasks = [] // Keep tasks as a global variable FOR INTEGRATION TESTING
 
-const tasks = []
+
 const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
+    input: process.stdin,
+    output: process.stdout
 })
 
 const commands = {
-  '--task': createTask,
-  '--done': completeTask,
-  '--help': displayHelp,
-  '--exit': exit
+    '--task': createTask,
+    '--done': completeTask,
+    '--help': displayHelp,
+    '--exit': exit
 }
 
 function createTask(taskName) {
-  if (!taskName) {
-    console.log('enter task name.')
-    return
-  }
-  const task = {
-    name: taskName,
-    status: 'in progress'
-  }
-  tasks.push(task)
-  console.log(`the task "${taskName}" created`)
+    if (!taskName) {
+        console.log('enter task name.')
+        return
+    }
+    const task = {
+        name: taskName,
+        status: 'in progress'
+    }
+    tasks.push(task)
+    console.log(`the task "${taskName}" created`)
 }
 
 function completeTask(taskName) {
-  if (!taskName) {
-    console.log('provide task name to complete')
-    return
-  }
-  const task = tasks.find(t => t.name === taskName)
-  if (task) {
-    task.status = 'completed'
-    console.log(`task "${taskName}" marked complete`)
-    sendEmail(task)
-  } else {
-    console.log(`task "${taskName}" not found`)
-  }
+    if (!taskName) {
+        console.log('provide task name to complete')
+        return
+    }
+    const task = tasks.find(t => t.name === taskName)
+    if (task) {
+        task.status = 'completed'
+        console.log(`task "${taskName}" marked complete`)
+        sendEmail(task)
+    } else {
+        console.log(`task "${taskName}" not found`)
+    }
 }
 
 function displayHelp() {
@@ -91,23 +90,23 @@ async function sendEmail(task) {
   }
 }
 
-function processInput(input) {
+function processInput(input) { // No tasks parameter here
   const [command, ...args] = input.trim().split(' ')
   if (commands[command]) {
-    commands[command](args.join(' '))
+      commands[command](args.join(' '))
   } else {
-    console.log('unknown command, use --help for usage information')
+      console.log('unknown command, use --help for usage information')
   }
 }
 
 function prompt() {
   rl.question('enter a command: ', (input) => {
-    if (input.trim().toLowerCase() === '--exit') {
-      exit()
-    } else {
-      processInput(input)
-      prompt()
-    }
+      if (input.trim().toLowerCase() === '--exit') {
+          exit()
+      } else {
+          processInput(input)
+          prompt()
+      }
   })
 }
 
