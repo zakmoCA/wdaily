@@ -22,9 +22,9 @@ Cool way to keep track of specific daily wins one might want a visual representa
 
 
 
-#### TODO
+#### TODO (working branch)
 
-- [ ] app_install_setup.sh
+- [ ] install/setup automation script
 - [ ] README app setup script/env vars hardcoding directions
 - [ ] Example usage
 
@@ -45,7 +45,7 @@ chmod +x app_install_setup.sh
 Run setup script:
 
 ```
-./app_install_setup.sh
+./install_and_setup.sh
 ```
 
 
