@@ -1,14 +1,13 @@
 #!/usr/bin/env node
-
 import nodemailer from 'nodemailer'
 import { configDotenv } from 'dotenv'
 import readline from 'node:readline'
-import { stdin as input, stdout as output } from 'node:process'
 
 configDotenv()
 
-
 const tasks = []
+
+
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
